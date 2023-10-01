@@ -6,11 +6,8 @@ import java.util.Map;
 
 public class Job {
 
-
-
     private int id;
     private static int nextId = 1;
-
     private String name;
     private Employer employer;
     private Location location;
@@ -104,36 +101,38 @@ public class Job {
         String newline = System.lineSeparator();
         String result = "";
 
-        if (!getName().equals("")) {
+        if (getName() != null && !getName().equals("")) {
             result += "Name: " + getName() + newline ;
         } else {
             result += "Name: " + "Data not available" + newline ;
         }
 
-        if (!getEmployer().toString().equals("")) {
+//       if (!getEmployer().toString().equals("")) {
+        if (getEmployer() != null && !getEmployer().toString().isEmpty()) {
+            // either isEmpty() or .equals("") works, but needs to apply to a string
             result += "Employer: " + getEmployer() + newline ;
         } else {
             result += "Employer: " + "Data not available" + newline ;
         }
 
-        if (!getLocation().toString().equals("")) {
+        if (getLocation() != null && !getLocation().toString().equals("")) {
             result += "Location: " + getLocation() + newline ;
         } else {
             result += "Location: " + "Data not available" + newline ;
         }
 
-        if (!getPositionType().toString().equals("")) {
+        if (getPositionType() != null && !getPositionType().toString().equals("")) {
             result += "Position Type: " + getPositionType() + newline ;
         } else {
             result += "Position Type: " + "Data not available" + newline ;
         }
 
-        if (!getCoreCompetency().toString().equals("")) {
+        if (getCoreCompetency() != null && !getCoreCompetency().toString().equals("")) {
             result += "Core Competency: " + getCoreCompetency() + newline ;
         } else {
             result += "Core Competency: " + "Data not available" + newline ;
         }
 
-        return newline+ "ID: " + getId() + newline + result;
+         return newline+ "ID: " + getId() + newline + result; //at return, if there's one string, the result will auto-convert to a string
     }
 }

@@ -51,6 +51,8 @@ public class JobTest {
 
         assertTrue(result.startsWith(newline));
         assertTrue(result.endsWith(newline));
+
+//        char sample = result.charAt(0);
 //        assertEquals(result.charAt(0),newline);
 //        assertEquals(result.charAt(result.length()-1),newline);
     }
