@@ -2,10 +2,12 @@ package org.launchcode.techjobs.oo;
 
 import org.junit.Test;
 
+import static java.lang.System.lineSeparator;
 import static org.junit.Assert.*;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertEquals;
 
 public class JobTest {
     @Test
@@ -45,23 +47,56 @@ public class JobTest {
 
         Job job6 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-        String actualFormattedJob = job6.toString();
+        String result = job6.toString();
 
-        String[] lines = actualFormattedJob.split(newline);
-
-        assertEquals("",lines[0]);
-        assertEquals("",lines[lines.length -1]);
+        assertTrue(result.startsWith(newline));
+        assertTrue(result.endsWith(newline));
+//        assertEquals(result.charAt(0),newline);
+//        assertEquals(result.charAt(result.length()-1),newline);
     }
 
     @Test
     public void testToStringContainsCorrectLabelsAndData() {
 
+        String newline = System.lineSeparator();
+
+        String msg = "testToStringContainsCorrectLabelsAndData";
+
         Job job7 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-        String formattedData = job7.toString();
+        String expected =  newline + "ID: " + job7.getId() + newline +
+                "Name: " + job7.getName() + newline +
+                "Employer: " + job7.getEmployer() + newline +
+                "Location: " + job7.getLocation() + newline +
+                "Position Type: " + job7.getPositionType() + newline +
+                "Core Competency: " + job7.getCoreCompetency() + newline;
 
-        assertEquals("", formattedData);
+        String actual = job7.toString();
+
+        assertEquals(msg, expected, actual);
+
     }
+
+    @Test
+    public void testToStringHandlesEmptyField(){
+        String msg = "test To String Handles Empty Field";
+
+        String newline = System.lineSeparator();
+
+        Job job8 = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+
+//        String expected = "ID: " + job8.getId() + newline + "Name: Data not available" + "Employer: Data not available" + newline + "Location: Data not available" + newline + "Position Type: Data not available" + newline + "Core Competency: Data not available";
+
+        String actual = job8.toString();
+
+        assertTrue(actual.contains("Name: Data not available"));
+        assertTrue(actual.contains("Employer: Data not available"));
+        assertTrue(actual.contains("Location: Data not available"));
+        assertTrue(actual.contains("Position Type: Data not available"));
+        assertTrue(actual.contains("Core Competency: Data not available"));
+    }
+
+
 
 }
 

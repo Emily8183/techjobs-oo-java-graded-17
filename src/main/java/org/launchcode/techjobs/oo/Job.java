@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class Job {
 
+
+
     private int id;
     private static int nextId = 1;
 
@@ -27,11 +29,12 @@ public class Job {
 
 
     public Job() {
-        this.id = nextId++;
+        id = nextId;
+        nextId++;
     }
 
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
-        this.id = nextId++;
+        this();
         this.name = name;
         this.employer = employer;
         this.location = location;
@@ -99,25 +102,38 @@ public class Job {
     @Override
     public String toString() {
         String newline = System.lineSeparator();
+        String result = "";
 
-        Map<String, Object> fieldValues = new HashMap<>();
-
-        fieldValues.put("Name", name);
-        fieldValues.put("Employer", employer);
-        fieldValues.put("Location", location);
-        fieldValues.put("PositionType", positionType);
-        fieldValues.put("CoreCompetency", coreCompetency);
-
-        for (Map.Entry<String, Object> entry : fieldValues.entrySet()) {
-            String filedName = entry.getKey();
-            Object value = entry.getValue();
-
-            if (value == null) {
-                return filedName + " : Data not available.";
-            } else {
-                return filedName + value + newline;
-            }
+        if (!getName().equals("")) {
+            result += "Name: " + getName() + newline ;
+        } else {
+            result += "Name: " + "Data not available" + newline ;
         }
-        return "";
+
+        if (!getEmployer().toString().equals("")) {
+            result += "Employer: " + getEmployer() + newline ;
+        } else {
+            result += "Employer: " + "Data not available" + newline ;
+        }
+
+        if (!getLocation().toString().equals("")) {
+            result += "Location: " + getLocation() + newline ;
+        } else {
+            result += "Location: " + "Data not available" + newline ;
+        }
+
+        if (!getPositionType().toString().equals("")) {
+            result += "Position Type: " + getPositionType() + newline ;
+        } else {
+            result += "Position Type: " + "Data not available" + newline ;
+        }
+
+        if (!getCoreCompetency().toString().equals("")) {
+            result += "Core Competency: " + getCoreCompetency() + newline ;
+        } else {
+            result += "Core Competency: " + "Data not available" + newline ;
+        }
+
+        return newline+ "ID: " + getId() + newline + result;
     }
 }

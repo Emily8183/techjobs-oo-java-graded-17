@@ -5,7 +5,7 @@ import java.util.Objects;
 public abstract class JobField {
     private int id;
     private static int nextId = 1;
-    private String value;
+    public String value;
 
     public JobField() {
         id = nextId;
@@ -30,34 +30,13 @@ public abstract class JobField {
     }
 
     @Override
-    public String toString(){
-//        String newline = System.lineSeparator();
-
-//        return  "ID: " + getId() + newline +
-//                "Name: " + getName() + newline +
-//                "Employer: " + getEmployer() + newline +
-//                "Location: " + getLocation() + newline +
-//                "Position Type: " + getPositionType() + newline +
-//                "Core Competency: " + getCoreCompetency() + newline;
-
-            return value;
-
+    public String toString() {
+        return value;
     };
 
+    public abstract boolean equals(Object o);
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        JobField jobField = (JobField) o;
-        return id == jobField.id && Objects.equals(value, jobField.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, value);
-    }
-
+    public abstract int hashCode();
 
 }
 
